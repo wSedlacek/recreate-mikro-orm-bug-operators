@@ -1,11 +1,11 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { EntityRepository } from '@mikro-orm/sqlite';
 
 import { DataEntity } from './data.entity';
 
 @Injectable()
-export class AppService implements OnModuleInit {
+export class AppService {
   constructor(
     @InjectRepository(DataEntity)
     private readonly data: EntityRepository<DataEntity>,
@@ -13,11 +13,5 @@ export class AppService implements OnModuleInit {
 
   public getData() {
     return this.data.findAll();
-  }
-
-  public async onModuleInit() {
-    const data1 = this.data.create({ name: 'data1' });
-
-    this.data.persistAndFlush(data1);
   }
 }
