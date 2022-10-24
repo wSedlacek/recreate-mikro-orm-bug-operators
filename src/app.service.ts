@@ -12,6 +12,7 @@ export class AppService {
   ) {}
 
   public getData() {
-    return this.data.findAll();
+    // return this.data.findAll();
+    return this.data.findAll({ having: { removedAt: null } });
   }
 }
